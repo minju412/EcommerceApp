@@ -19,7 +19,7 @@ import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/user-service") // gateway를 사용하기 위해서 prefix를 지정한다.
 public class UserController {
 
     @Autowired // 이처럼 직접 주입 받는 것은 권장하지 않는다.
@@ -36,7 +36,8 @@ public class UserController {
 
     @GetMapping("health-check")
     public String status() {
-        return "It's Working in User Service";
+        return String.format("It's Working in User Service on PORT %s",
+            env.getProperty("local.server.port"));
     }
 
     @GetMapping("welcome")
