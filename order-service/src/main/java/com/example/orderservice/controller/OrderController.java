@@ -1,5 +1,8 @@
 package com.example.orderservice.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.jpa.OrderEntity;
 import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.RequestOrder;
 import com.example.orderservice.vo.ResponseOrder;
@@ -51,4 +55,15 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
     }
 
+    @GetMapping("/{userId}/orders")
+    public ResponseEntity<List<ResponseOrder>> getOrder(@PathVariable("userId") String userId) {
+        Iterable<OrderEntity> orderList = orderService.getOrdersByUserId(userId);
+        List<ResponseOrder> result = new ArrayList<>();
+
+        orderList.forEach(x -> {
+            result.add(new ModelMapper().map(x, ResponseOrder.class));
+        });
+
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 }
