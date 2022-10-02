@@ -24,7 +24,7 @@ import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
 
 @RestController
-@RequestMapping("/user-service") // gateway를 사용하기 위해서 prefix를 지정한다.
+@RequestMapping("/") // gateway 에서 RewritePath 를 지정했기 때문에 prefix 를 제거한다.
 public class UserController {
 
     @Autowired // 이처럼 직접 주입 받는 것은 권장하지 않는다.

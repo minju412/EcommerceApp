@@ -33,7 +33,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-            // .antMatchers("/users/**")
             .antMatchers("/**")
             .hasIpAddress("192.168.x.x") // 본인 IP 변경
             .and()
