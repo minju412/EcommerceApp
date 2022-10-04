@@ -79,6 +79,16 @@
             <version>0.9.1</version>
         </dependency>
 
+        <!-- spring-cloud-config 설정 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

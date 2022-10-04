@@ -41,8 +41,12 @@ public class UserController {
 
     @GetMapping("/health-check")
     public String status() {
-        return String.format("It's Working in User Service on PORT %s",
-            env.getProperty("local.server.port"));
+        return String.format("It's Working in User Service"
+            + ", port(local.server.port) = " + env.getProperty("local.server.port") // 랜덤으로 할당받은 포트 번호
+            + ", port(server.port) = " + env.getProperty("server.port") // 0 (랜덤포트 사용)
+            + ", token secret = " + env.getProperty("token.secret") // Configuration Server 에서 가져온 값
+            + ", token expiration time = " + env.getProperty("token.expiration_time")  // Configuration Server 에서 가져온 값
+        );
     }
 
     @GetMapping("/welcome")
