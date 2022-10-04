@@ -32,6 +32,12 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+
+        // Actuator 에 대해서는 인증을 거치지 않고 바로 사용
+        http.authorizeRequests()
+            .antMatchers("/actuator/**")
+            .permitAll();
+
         http.authorizeRequests()
             .antMatchers("/**")
             .permitAll()
