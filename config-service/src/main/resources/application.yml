@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   profiles:
     active: native
   cloud:
@@ -17,3 +22,8 @@ spring:
           ## remote git repository 가 private 이라면 username 과 password 도 입력한다.
 #          username:
 #          password:
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
