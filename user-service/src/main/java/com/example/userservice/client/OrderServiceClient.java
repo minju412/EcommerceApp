@@ -11,6 +11,6 @@ import com.example.userservice.vo.ResponseOrder;
 @FeignClient(name = "order-service") // 호출하려는 마이크로 서비스 이름
 public interface OrderServiceClient {
 
-    @GetMapping("/order-service/{userId}/orders") // prefix + uri
+    @GetMapping("/order-service/{userId}/orders_ng") // prefix + uri
     List<ResponseOrder> getOrders(@PathVariable String userId);
 }
