@@ -25,8 +25,11 @@ import com.example.orderservice.service.OrderService;
 import com.example.orderservice.vo.RequestOrder;
 import com.example.orderservice.vo.ResponseOrder;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/order-service")
+@Slf4j
 public class OrderController {
 
     Environment env;
@@ -50,6 +53,7 @@ public class OrderController {
 
     @PostMapping("/{userId}/orders")
     public ResponseEntity<ResponseOrder> createOrder(@PathVariable("userId") String userId, @RequestBody RequestOrder requestOrder) {
+        log.info("Before add orders data");
         ModelMapper mapper = new ModelMapper();
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
@@ -70,11 +74,13 @@ public class OrderController {
         //
         // ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
 
+        log.info("After added orders data");
         return ResponseEntity.status(HttpStatus.CREATED).body(responseOrder);
     }
 
     @GetMapping("/{userId}/orders")
-    public ResponseEntity<List<ResponseOrder>> getOrder(@PathVariable("userId") String userId) {
+    public ResponseEntity<List<ResponseOrder>> getOrder(@PathVariable("userId") String userId) throws Exception {
+        log.info("Before retrieve orders data");
         Iterable<OrderEntity> orderList = orderService.getOrdersByUserId(userId);
         List<ResponseOrder> result = new ArrayList<>();
 
@@ -82,6 +88,15 @@ public class OrderController {
             result.add(new ModelMapper().map(x, ResponseOrder.class));
         });
 
+        /* 오류 테스트 */
+        // try {
+        //     Thread.sleep(1000);
+        //     throw new Exception("장애 발생");
+        // } catch(InterruptedException ex) {
+        //     log.warn(ex.getMessage());
+        // }
+
+        log.info("After retrieved orders data");
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 }
