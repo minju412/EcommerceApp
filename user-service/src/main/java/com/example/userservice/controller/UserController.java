@@ -23,6 +23,8 @@ import com.example.userservice.vo.Greeting;
 import com.example.userservice.vo.RequestUser;
 import com.example.userservice.vo.ResponseUser;
 
+import io.micrometer.core.annotation.Timed;
+
 @RestController
 @RequestMapping("/") // gateway 에서 RewritePath 를 지정했기 때문에 prefix 를 제거한다.
 public class UserController {
@@ -40,6 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/health-check")
+    @Timed(value = "users.status", longTask = true)
     public String status() {
         return String.format("It's Working in User Service"
             + ", port(local.server.port) = " + env.getProperty("local.server.port") // 랜덤으로 할당받은 포트 번호
@@ -50,6 +53,7 @@ public class UserController {
     }
 
     @GetMapping("/welcome")
+    @Timed(value = "users.welcome", longTask = true)
     public String welcome() {
         // return env.getProperty("greeting.message");
         return greeting.getMessage();
