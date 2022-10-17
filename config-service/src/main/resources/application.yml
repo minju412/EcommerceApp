@@ -19,8 +19,7 @@ spring:
         git:
 #          uri: file:///Users/minju/study/msa/git-local-repo # local git repository 위치
           uri: https://github.com/minju412/spring-cloud-config # remote git repository 주소
-          ## remote git repository 가 private 이라면 username 과 password 도 입력한다.
-#          username:
+#          username: ## remote git repository 가 private 이라면 username 과 password 도 입력한다.
 #          password:
 management:
   endpoints:
