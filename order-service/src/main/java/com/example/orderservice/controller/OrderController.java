@@ -69,9 +69,9 @@ public class OrderController {
         // orderDto.setTotalPrice(requestOrder.getQty() * requestOrder.getUnitPrice());
 
         /* send this order to the kafka */
-        // kafkaProducer.send("example-catalog-topic", orderDto); // 토픽 이름은 catalog-service 의 KafkaConsumer 에서 확인할 수 있다.
+        kafkaProducer.send("example-catalog-topic", orderDto); // 토픽 이름은 catalog-service 의 KafkaConsumer 에서 확인할 수 있다.
         // orderProducer.send("orders", orderDto);
-        //
+
         // ResponseOrder responseOrder = mapper.map(orderDto, ResponseOrder.class);
 
         log.info("After added orders data");
